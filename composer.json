@@ -1,0 +1,36 @@
+{
+  "name": "navjobs/transmit",
+  "description": "An opinionated rabbit mq messaging service",
+  "keywords": [
+    "laravel",
+    "rabbit"
+  ],
+  "homepage": "https://kimmel.com",
+  "license": "MIT",
+  "require": {
+    "php": ">=5.5.0",
+    "illuminate/support": "^5.1",
+    "illuminate/console": "^5.1",
+    "videlalvaro/php-amqplib": "^2.6"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^4.0",
+    "scrutinizer/ocular": "^1.1",
+    "orchestra/testbench": "^3.0",
+    "mockery/mockery": "^0.9.4",
+    "satooshi/php-coveralls": "1.*"
+  },
+  "autoload": {
+    "psr-4": {
+      "NavJobs\\rabbit-messenger\\": "src"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "NavJobs\\rabbit-messenger\\Test\\": "tests"
+    }
+  },
+  "scripts": {
+    "test": "phpunit"
+  }
+}
