@@ -12,14 +12,14 @@ class Consumer extends Command
      *
      * @var string
      */
-    protected $signature = 'rabbit:consume {exchangeName}';
+    protected $signature = 'rabbit:consume {handlerName}';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Consumes messages from Rabbit MQ on the specified exchange';
+    protected $description = 'Consumes messages from Rabbit MQ using the specified handler';
 
     /**
      * @var AMQPStreamConnection
@@ -43,8 +43,8 @@ class Consumer extends Command
      */
     public function handle()
     {
-        $exchangeName = $this->argument('exchangeName');
-
+        $handler = new $this->argument('handlerName');
+        $exchangeName = $handler->getExchange;
         $channel = $this->connection->channel();
 
         $channel->exchange_declare(
@@ -92,8 +92,8 @@ class Consumer extends Command
             $no_ack = true,
             $exclusive = false,
             $nowait = false,
-            function ($message) {
-                
+            function ($message) use ($handler) {
+                $handler->handle($message);
             },
             $ticket = null,
             $arguments = []
