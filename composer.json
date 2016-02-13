@@ -1,5 +1,5 @@
 {
-  "name": "navjobs/transmit",
+  "name": "navjobs/rabbit-messenger",
   "description": "An opinionated rabbit mq messaging service",
   "keywords": [
     "laravel",
