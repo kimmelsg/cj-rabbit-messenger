@@ -1,6 +1,6 @@
 <?php
 
-namespace NavJobs\rabbitMessenger;
+namespace NavJobs\RabbitMessenger;
 
 interface HandlerInterface
 {

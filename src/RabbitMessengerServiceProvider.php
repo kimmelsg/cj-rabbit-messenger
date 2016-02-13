@@ -1,6 +1,6 @@
 <?php
 
-namespace NavJobs\rabbitMessenger;
+namespace NavJobs\RabbitMessenger;
 
 use Illuminate\Support\ServiceProvider;
 use PhpAmqpLib\Connection\AMQPStreamConnection;
@@ -34,7 +34,7 @@ class RabbitMessengerServiceProvider extends ServiceProvider
         });
 
         $this->app->singleton('command.rabbit.consume', function ($app) {
-            return $app['NavJobs\rabbit-messenger\Commands\Consume'];
+            return $app['NavJobs\RabbitMessenger\Commands\Consume'];
         });
 
         $this->commands('command.rabbit.consume');
