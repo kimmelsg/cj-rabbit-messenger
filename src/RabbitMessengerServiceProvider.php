@@ -34,7 +34,7 @@ class RabbitMessengerServiceProvider extends ServiceProvider
         });
 
         $this->app->singleton('command.rabbit.consume', function ($app) {
-            return $app['NavJobs\RabbitMessenger\Commands\Consume'];
+            return $app['NavJobs\RabbitMessenger\Commands\Consumer'];
         });
 
         $this->commands('command.rabbit.consume');
