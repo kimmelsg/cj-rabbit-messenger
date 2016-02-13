@@ -26,10 +26,10 @@ class RabbitMessengerServiceProvider extends ServiceProvider
 
         $this->app->singleton(AMQPStreamConnection::class, function ($app) {
             return new AMQPStreamConnection(
-                config('rabbitmq.host'),
-                config('rabbitmq.port'),
-                config('rabbitmq.user'),
-                config('rabbitmq.password')
+                config('rabbit-messenger.host'),
+                config('rabbit-messenger.port'),
+                config('rabbit-messenger.user'),
+                config('rabbit-messenger.password')
             );
         });
 
