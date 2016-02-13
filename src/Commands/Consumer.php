@@ -3,6 +3,7 @@
 namespace NavJobs\RabbitMessenger\Commands;
 
 use Illuminate\Console\Command;
+use Illuminate\Contracts\Foundation\Application;
 use PhpAmqpLib\Connection\AMQPStreamConnection;
 
 class Consumer extends Command
@@ -12,7 +13,8 @@ class Consumer extends Command
      *
      * @var string
      */
-    protected $signature = 'rabbit:consume {handlerName}';
+    protected $signature = 'rabbit:consume
+                            {handlerName : the class name of the handler}';
 
     /**
      * The console command description.
@@ -21,19 +23,19 @@ class Consumer extends Command
      */
     protected $description = 'Consumes messages from Rabbit MQ using the specified handler';
 
-    /**
-     * @var AMQPStreamConnection
-     */
     private $connection;
+    private $application;
 
     /**
      * Create a new command instance.
      * @param AMQPStreamConnection $AMQPStreamConnection
+     * @param Application $application
      */
-    public function __construct(AMQPStreamConnection $AMQPStreamConnection)
+    public function __construct(AMQPStreamConnection $AMQPStreamConnection, Application $application)
     {
         parent::__construct();
         $this->connection = $AMQPStreamConnection;
+        $this->application = $application;
     }
 
     /**
@@ -43,8 +45,8 @@ class Consumer extends Command
      */
     public function handle()
     {
-        $handler = new $this->argument('handlerName');
-        $exchangeName = $handler->getExchange;
+        $handler = $this->application->make($this->argument('handlerName'));
+        $exchangeName = $handler->getExchangeName();
         $channel = $this->connection->channel();
 
         $channel->exchange_declare(
@@ -93,7 +95,7 @@ class Consumer extends Command
             $exclusive = false,
             $nowait = false,
             function ($message) use ($handler) {
-                $handler->handle($message);
+                $handler->handle($message->getBody());
             },
             $ticket = null,
             $arguments = []
