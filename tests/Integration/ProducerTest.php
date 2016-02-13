@@ -2,8 +2,6 @@
 
 namespace NavJobs\RabbitMessenger\Test\Integration;
 
-use Illuminate\Support\Facades\App;
-use Illuminate\Support\Facades\Artisan;
 use Mockery;
 use NavJobs\RabbitMessenger\Producer;
 use PhpAmqpLib\Channel\AMQPChannel;
@@ -15,14 +13,21 @@ class ProducerTest extends TestCase
     /**
      * @test
      */
-    public function it_consumes_a_message_and_calls_the_specified_handler()
+    public function it_sends_a_message_to_rabbit_mq()
     {
-        $stream = Mockery::mock(AMQPStreamConnection::class);
-        $producer = App::make(Producer::class);
+        $stream = Mockery::spy(AMQPStreamConnection::class);
+        $stream->shouldReceive('channel')
+            ->once()
+            ->andReturn(
+                $channel = Mockery::spy(AMQPChannel::class)
+            );
 
+        $producer = new Producer($stream);
         $producer->send('test');
 
+        $channel->shouldHaveReceived('exchange_declare');
+        $channel->shouldHaveReceived('basic_publish');
 
-        $stream->shouldHaveReceived('channel');
+        Mockery::close();
     }
 }
