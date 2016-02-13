@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Console\Commands;
+namespace NavJobs\rabbitMessenger\Commands;
 
 use Illuminate\Console\Command;
 use PhpAmqpLib\Connection\AMQPStreamConnection;

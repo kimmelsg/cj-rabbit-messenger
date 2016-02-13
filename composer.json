@@ -22,12 +22,12 @@
   },
   "autoload": {
     "psr-4": {
-      "NavJobs\\rabbit-messenger\\": "src"
+      "NavJobs\\rabbitMessenger\\": "src"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "NavJobs\\rabbit-messenger\\Test\\": "tests"
+      "NavJobs\\rabbitMessenger\\Test\\": "tests"
     }
   },
   "scripts": {

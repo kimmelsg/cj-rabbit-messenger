@@ -1,11 +1,11 @@
 <?php
 
-namespace NavJobs\Transmit;
+namespace NavJobs\rabbitMessenger;
 
 use Illuminate\Support\ServiceProvider;
 use PhpAmqpLib\Connection\AMQPStreamConnection;
 
-class TransmitServiceProvider extends ServiceProvider
+class RabbitMessengerServiceProvider extends ServiceProvider
 {
     /**
      * Bootstrap the application services.
