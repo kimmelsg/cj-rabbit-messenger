@@ -16,4 +16,17 @@ abstract class TestCase extends Orchestra
     {
         return [RabbitMessengerServiceProvider::class];
     }
+
+    /**
+     * Define environment setup.
+     *
+     * @param \Illuminate\Foundation\Application $app
+     */
+    protected function getEnvironmentSetUp($app)
+    {
+        $app['config']->set('rabbit-messenger.host', 'localhost');
+        $app['config']->set('rabbit-messenger.port', 5672);
+        $app['config']->set('rabbit-messenger.user', 'guest');
+        $app['config']->set('rabbit-messenger.password', 'guest');
+    }
 }
