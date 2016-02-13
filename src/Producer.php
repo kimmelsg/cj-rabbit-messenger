@@ -5,7 +5,7 @@ namespace NavJobs\RabbitMessenger;
 use PhpAmqpLib\Connection\AMQPStreamConnection;
 use PhpAmqpLib\Message\AMQPMessage;
 
-class RabbitProducer
+class Producer
 {
     /**
      * Create a new command instance.
@@ -45,7 +45,7 @@ class RabbitProducer
 
         $channel->basic_publish(
             $msg = $message,
-            $exchange = 'email_queue',
+            $exchange = $exchangeName,
             $routing_key = '',
             $mandatory = false,
             $immediate = false,
