@@ -91,7 +91,7 @@ class Consumer extends Command
             $queue = $queue_name,
             $consumer_tag = '',
             $no_local = false,
-            $no_ack = true,
+            $no_ack = false,
             $exclusive = false,
             $nowait = false,
             function ($message) use ($handler) {
