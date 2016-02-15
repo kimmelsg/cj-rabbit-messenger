@@ -1,10 +1,10 @@
 <?php
 
-namespace NavJobs\RabbitMessenger;
+namespace NavJobs\RabbitMessenger\Traits;
 
 use Mockery;
 
-trait PreventRabbitProduction
+trait PreventMessageProduction
 {
     /**
      * @before
