@@ -3,6 +3,7 @@
 namespace NavJobs\RabbitMessenger\Traits;
 
 use Mockery;
+use NavJobs\RabbitMessenger\Producer;
 
 trait PreventMessageProduction
 {
