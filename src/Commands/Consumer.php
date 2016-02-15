@@ -47,6 +47,7 @@ class Consumer extends Command
     {
         $handler = $this->application->make($this->argument('handlerName'));
         $exchangeName = $handler->getExchangeName();
+        $queueName = method_exists($handler, 'getQueueName') ? $handler->getQueueName() : '';
         $channel = $this->connection->channel();
 
         $channel->exchange_declare(
@@ -62,10 +63,10 @@ class Consumer extends Command
         );
 
         list($queue_name, ,) = $channel->queue_declare(
-            $queue = '',
+            $queue = $queueName,
             $passive = false,
             $durable = true,
-            $exclusive = true,
+            $exclusive = false,
             $auto_delete = true,
             $nowait = false,
             $arguments = null,
