@@ -96,6 +96,7 @@ class Consumer extends Command
             $nowait = false,
             function ($message) use ($handler) {
                 $handler->handle($message->getBody());
+                $message->delivery_info['channel']->basic_ack($message->delivery_info['delivery_tag']);
             },
             $ticket = null,
             $arguments = []
