@@ -24,7 +24,7 @@ class RabbitMessengerServiceProvider extends ServiceProvider
     {
         $this->mergeConfigFrom(__DIR__.'/../config/rabbit-messenger.php', 'rabbit-messenger');
 
-        $this->app->singleton(AMQPStreamConnection::class, function ($app) {
+        $this->app->bind(AMQPStreamConnection::class, function ($app) {
             return new AMQPStreamConnection(
                 config('rabbit-messenger.host'),
                 config('rabbit-messenger.port'),
