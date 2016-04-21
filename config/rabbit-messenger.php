@@ -2,9 +2,9 @@
 
 return [
 
-    'host'     => env('RABBITMQ_HOST', 'localhost'),
-    'port'     => env('RABBITMQ_HOST', '5672'),
-    'user'     => env('RABBITMQ_USER', 'guest'),
-    'password' => env('RABBITMQ_HOST', 'guest'),
+    'host'     => 'localhost',
+    'port'     => '5672',
+    'user'     => 'guest',
+    'password' => 'guest',
 
 ];
