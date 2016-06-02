@@ -29,7 +29,17 @@ class RabbitMessengerServiceProvider extends ServiceProvider
                 config('rabbit-messenger.host'),
                 config('rabbit-messenger.port'),
                 config('rabbit-messenger.user'),
-                config('rabbit-messenger.password')
+                config('rabbit-messenger.password'),
+                $vhost = '/',
+                $insist = false,
+                $login_method = 'AMQPLAIN',
+                $login_response = null,
+                $locale = 'en_US',
+                $connection_timeout = 60,
+                $read_write_timeout = 60,
+                $context = null,
+                $keepalive = false,
+                $heartbeat = 30
             );
         });
 
