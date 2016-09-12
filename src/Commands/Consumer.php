@@ -3,7 +3,6 @@
 namespace NavJobs\RabbitMessenger\Commands;
 
 use Illuminate\Console\Command;
-use Illuminate\Contracts\Foundation\Application;
 use PhpAmqpLib\Connection\AMQPStreamConnection;
 
 class Consumer extends Command
@@ -24,18 +23,15 @@ class Consumer extends Command
     protected $description = 'Consumes messages from Rabbit MQ using the specified handler';
 
     private $connection;
-    private $application;
 
     /**
      * Create a new command instance.
      * @param AMQPStreamConnection $AMQPStreamConnection
-     * @param Application $application
      */
-    public function __construct(AMQPStreamConnection $AMQPStreamConnection, Application $application)
+    public function __construct(AMQPStreamConnection $AMQPStreamConnection)
     {
         parent::__construct();
         $this->connection = $AMQPStreamConnection;
-        $this->application = $application;
     }
 
     /**
@@ -45,7 +41,7 @@ class Consumer extends Command
      */
     public function handle()
     {
-        $handler = $this->application->make($this->argument('handlerName'));
+        $handler = app($this->argument('handlerName'));
         $exchangeName = $handler->getExchangeName();
         $queueName = method_exists($handler, 'getQueueName') ? $handler->getQueueName() : '';
         $channel = $this->connection->channel();
